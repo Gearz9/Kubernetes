@@ -1,0 +1,43 @@
+1. `minikube start/delete`: Starts or deletes a Minikube cluster.
+2. `minikube status`: Checks the status of the Minikube cluster.
+3. `minikube dashboard`: Opens the Kubernetes dashboard in a web browser.
+4. `kubectl create deployment <my-app-name> --image=<image-name>:<version>`: Creates a deployment with a specified name and image.
+5. `kubectl get deployments`: Lists all deployments in the cluster.
+6. `kubectl get pods`: Lists all pods in the cluster.
+7. `kubectl delete deployment <my-app-name>`: Deletes the deployment with the specified name.
+8. `kubectl expose deployment <my-app-name> --type=LoadBalancer --port=80`: Exposes the deployment externally via a LoadBalancer service.
+9. `minikube service <my-app-name>`: Opens the service for the specified deployment.
+10. `kubectl get services`: Lists all services in the cluster.
+11. `kubectl edit service <web-app>`: Opens the service configuration in an editor for editing.
+12. `kubectl get all`: Lists all resources (pods, services, deployments, etc.) in the cluster.
+13. `kubectl set image deployment <my-app-name> <container-name>=<image-name>:<version>`: Updates the image of the specified deployment.
+14. `kubectl rollout status deployment <my-app-name>`: Checks the status of a rollout for the specified deployment.
+15. `kubectl rollout undo deployment <my-app-name>`: Rolls back a deployment to the previous version.
+16. `kubectl scale deployment <my-app-name> --replicas=4`: Scales the specified deployment to have 4 replicas.
+17. `kubectl apply -f <yml-file-name.yml>`: Applies the configuration defined in the YAML file to the cluster.
+18. `docker run -d -p 27017:27017 --network my-net --name mongo mongo`: Runs a MongoDB container detached with port mapping and network configuration.
+
+
+
+
+
+
+1. **Namespace Management**: Kubernetes supports multiple virtual clusters backed by the same physical cluster. Namespaces provide a way to divide cluster resources between multiple users (via resource quota) or to partition resources logically.
+
+2. **Pods**: Pods are the smallest deployable units of computing in Kubernetes. They represent a single instance of a running process in your cluster. Pods can contain one or more containers that are tightly coupled and share resources.
+
+3. **Services**: Kubernetes Services enable communication between different sets of Pods. They provide a stable endpoint (IP address) for accessing the Pods that belong to the Service, even if the Pods are replaced or scaled up/down.
+
+4. **Volumes**: Kubernetes Volumes are used to persist data in containers. They provide a way for containers to store and share data independent of the container lifecycle. PersistentVolumes (PVs) and PersistentVolumeClaims (PVCs) are used to manage storage resources in Kubernetes.
+
+5. **ConfigMaps and Secrets**: ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable. Secrets are similar to ConfigMaps but are intended to store sensitive information such as passwords, OAuth tokens, and SSH keys.
+
+6. **Rolling Updates and Rollbacks**: Kubernetes supports rolling updates for deployments, allowing you to update your application without downtime. It gradually replaces old Pods with new ones, ensuring high availability. If there's an issue with the update, you can easily rollback to the previous version.
+
+7. **Horizontal Pod Autoscaling (HPA)**: HPA automatically scales the number of Pods in a deployment based on observed CPU utilization (or other metrics). It ensures that your application can handle varying loads efficiently without manual intervention.
+
+8. **RBAC (Role-Based Access Control)**: Kubernetes supports RBAC, allowing you to define fine-grained access policies for users and service accounts. RBAC helps enforce the principle of least privilege, improving security by limiting access to resources.
+
+9. **StatefulSets**: StatefulSets are a type of controller used for stateful applications that require stable, unique network identifiers and persistent storage. They ensure that Pods are created and scaled in a predictable and ordered manner.
+
+10. **Ingress**: Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. It provides features such as SSL termination, path-based routing, and name-based virtual hosting.

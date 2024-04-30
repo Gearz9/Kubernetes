@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nodedb-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodedb-app
+  template:
+    metadata:
+      labels:
+        app: nodedb-app
+    spec:
+      containers:
+      - name: nodedb-app
+        image: gearz9/demo-mongo-db:v1
+      - name: mongodb
+        image: mongo:latest
+
+        # To address the warning about resource limits for containers in Kubernetes, you can specify resource limits in the container specification within your Deployment YAML. This ensures that each container does not consume more than its allocated resources, preventing one container from starving others.
+        # resources:
+        #   limits:
+        #     cpu: "0.5"
+        #     memory: "512Mi"
+        #   requests:
+        #     cpu: "0.25"
+        #     memory: "256Mi"
+
+
+
+# WE CAN HAVE DEPLOYMENT AND SERVICE IN SAME FILE INSTEAD OF DIFFERENT FILE
+
+# FIRST GIVE ---
+---
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: service-my-db-app
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    # Loadbalance traffic across Pods matching
+    # this label selector
+    app: nodedb-app
+  # Create an HA proxy in the cloud provider
+  # with an External IP address - *Only supported
+  # by some cloud providers*
+  type: LoadBalancer
